@@ -5,15 +5,17 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useDispatch, useSelector } from 'react-redux';
 import { selectTaskState, setTaskState, TaskState } from '../store/task';
 import { withRouter } from 'next/router';
+import { useRouter } from 'next/router'
 
 function Edit({ router: { query } }: any) {
+  const router = useRouter()
+
   let task: TaskState | null = null;
   if (query && query.task) {
     task = JSON.parse(query.task);
   }
 
   const [startDate, setStartDate] = useState(task && task.date ? new Date(task.date) : new Date());
-  const cardList = useSelector(selectTaskState);
   const dispatch = useDispatch();
 
   const handleSubmit = async (event: any) => {
@@ -26,24 +28,41 @@ function Edit({ router: { query } }: any) {
       description: event.target.description.value,
       date: event.target.date.value
     }));
+    router.push('/')
   }
 
   return (
     <div className='container m-auto'>
       <NavigationButtons />
-
-      <form className='flex-col text-center w-full' onSubmit={handleSubmit}>
-        <div className='w-full mb-5'>
-          <input defaultValue={task?.title} id="title" className='w-1/4' type={'text'} required placeholder={'Insert title'}></input>
-        </div>
-        <div className='w-full'>
-          <textarea defaultValue={task?.description} id="description" className='w-1/4' required placeholder={'Insert description'}></textarea>
-        </div>
-        <div className='w-full'>
-          <DatePicker id="date" className='w-1/4' selected={startDate} onChange={(date: Date) => setStartDate(date)} />
-        </div>
-        <button type="submit">Submit</button>
-      </form>
+      <div className="w-full max-w-xs m-auto mt-28">
+        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2" >
+              title
+            </label>
+            <input className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-white-700 leading-tight focus:outline-none focus:shadow-outline" defaultValue={task?.title} id="title" type="text" placeholder="Insert title">
+            </input>
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Description
+            </label>
+            <textarea className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-white-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" defaultValue={task?.description} id="description" placeholder="Insert description">
+            </textarea>
+          </div>
+          <div className="mb-6">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Date
+            </label>
+            <DatePicker id="date" className='w-full shadow appearance-none border border-red-500 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline' selected={startDate} onChange={(date: Date) => setStartDate(date)} />
+          </div>
+          <div className="items-center text-center">
+            <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   )
 }

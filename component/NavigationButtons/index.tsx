@@ -3,7 +3,7 @@ import Link from 'next/link';
 export const NavigationButtons = ( addTask: any) => {
 
   return (
-    <div className="flex justify-between w-full">
+    <div className="flex justify-between w-full my-4">
       <Link href="/" >
         <button className='btn btn-blue'>Tasks</button>
       </Link>
