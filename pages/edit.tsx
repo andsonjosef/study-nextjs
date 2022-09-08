@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { NavigationButtons } from '../component/NavigationButtons';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useDispatch, useSelector } from 'react-redux';
-import { selectTaskState, setTaskState, TaskState } from '../store/task';
+import { useDispatch } from 'react-redux';
+import { setTaskState, TaskState } from '../store/task';
 import { withRouter } from 'next/router';
 import { useRouter } from 'next/router'
 

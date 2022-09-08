@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import { CardList } from '../component/CardList';
 import { NavigationButtons } from '../component/NavigationButtons';
 import { selectTaskState } from "../store/task";
+import SignIn from './api/signin';
 
 
 
@@ -10,10 +11,11 @@ function Home() {
 
 
   return (
-    <div className='container m-auto'>
-      <NavigationButtons />
-      <CardList tasks={cardList} ></CardList>
-    </div>
+    <SignIn></SignIn>
+    // <div className='container m-auto'>
+    //   <NavigationButtons />
+    //   <CardList tasks={cardList} ></CardList>
+    // </div>
   )
 }
 

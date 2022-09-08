@@ -4,7 +4,7 @@ export const NavigationButtons = ( addTask: any) => {
 
   return (
     <div className="flex justify-between w-full my-4">
-      <Link href="/" >
+      <Link href="/main" >
         <button className='btn btn-blue'>Tasks</button>
       </Link>
       <Link href="/edit">
